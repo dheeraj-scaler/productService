@@ -1,13 +1,16 @@
 package com.scaler.demoproject;
 
+import com.scaler.demoproject.model.Product;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoProjectApplication {
+public class DemoProjectMainClass {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoProjectApplication.class, args);
+        Product p = new Product();
+
+        SpringApplication.run(DemoProjectMainClass.class, args);
     }
 
 }
