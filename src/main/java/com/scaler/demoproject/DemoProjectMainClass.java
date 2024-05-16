@@ -9,6 +9,7 @@ public class DemoProjectMainClass {
 
     public static void main(String[] args) {
         Product p = new Product();
+        p.setTitle("xyz");
 
         SpringApplication.run(DemoProjectMainClass.class, args);
     }

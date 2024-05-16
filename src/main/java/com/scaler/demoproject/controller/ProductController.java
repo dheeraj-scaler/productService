@@ -1,11 +1,9 @@
 package com.scaler.demoproject.controller;
 
+import com.scaler.demoproject.model.Product;
 import com.scaler.demoproject.service.FakeStoreProductService;
 import com.scaler.demoproject.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,16 +29,19 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public void createProduct() {
-//        productService.createProduct();
+    public Product createProduct(@RequestBody Product product) {
        // Whenever someone is doing a post request on /product
        // Plz execute this method
+        Product postRequestResponse = productService.createProduct(product);
+        return postRequestResponse;
     }
 
     @GetMapping("/products/{id}")
-    public void getProduct(@PathVariable("id") Long productId) {
+    public Product getProduct(@PathVariable("id") Long productId) {
         // Whenever someone is doing a get request on /product/{id}
         // Plz execute this method
+        Product currentProduct = productService.getSingleProduct(productId);
+        return currentProduct;
     }
 
     @GetMapping("/products")
