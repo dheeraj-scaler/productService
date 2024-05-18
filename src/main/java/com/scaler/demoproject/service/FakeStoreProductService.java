@@ -1,7 +1,10 @@
 package com.scaler.demoproject.service;
 
 import com.scaler.demoproject.dto.FakeStoreProductDto;
+import com.scaler.demoproject.exceptions.ProductNotFoundException;
 import com.scaler.demoproject.model.Product;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,13 +20,35 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public Product getSingleProduct(Long productId) {
+    public Product getSingleProduct(Long productId) throws ProductNotFoundException {
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
                 "https://fakestoreapi.com/products/" + productId,
                 FakeStoreProductDto.class
         );
 
-        System.out.printf(fakeStoreProductDto.toString());
+        if(fakeStoreProductDto == null) {
+            throw new ProductNotFoundException("Product not found " +
+                    "with id "+ productId);
+        }
+
+
+// You can use the below function to handle 3rd party api responses accordingly
+//        ResponseEntity<FakeStoreProductDto> fakeStoreProductDto = restTemplate.getForEntity(
+//                "https://fakestoreapi.com/products/" + productId,
+//                FakeStoreProductDto.class
+//        );
+//
+//
+//
+//        if(fakeStoreProductDto.getStatusCode() == HttpStatus.OK) {
+//            // print Hello
+//        } else if(fakeStoreProductDto.getStatusCode() == HttpStatus.NOT_FOUND) {
+//            // handle things accordingly
+//            throw new ProductNotFoundException("Product not found " +
+//                    "with id "+ productId);
+//        }
+//
+//        System.out.printf(fakeStoreProductDto.toString());
 
         return fakeStoreProductDto.toProduct();
     }
