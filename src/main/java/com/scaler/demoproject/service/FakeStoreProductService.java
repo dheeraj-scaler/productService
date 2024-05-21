@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,8 +56,16 @@ public class FakeStoreProductService implements ProductService{
 
     @Override
     public List<Product> getAllProducts() {
-        System.out.println("We are here");
-        return List.of();
+        List<Product> products = new ArrayList<>();
+        FakeStoreProductDto[] res = restTemplate.getForObject(
+                "url",
+                FakeStoreProductDto[].class
+        );
+
+        for(FakeStoreProductDto fs: res) {
+            products.add(fs.toProduct());
+        }
+        return products;
     }
 
     @Override
