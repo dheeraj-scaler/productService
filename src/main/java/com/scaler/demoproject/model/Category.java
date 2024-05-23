@@ -1,5 +1,6 @@
 package com.scaler.demoproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -17,5 +18,6 @@ import java.util.List;
 public class Category extends BaseModel{
     private String title;
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Product> products;
 }
