@@ -21,6 +21,8 @@ public class Product extends BaseModel {
     private String imageUrl;
     @ManyToOne
     private Category category;
+    private int weight;
+    private int height;
 
     @Override
     public String toString() {
