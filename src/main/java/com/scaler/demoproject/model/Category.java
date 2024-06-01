@@ -19,5 +19,6 @@ import java.util.List;
 public class Category extends BaseModel{
     private String title;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Product> products;
 }

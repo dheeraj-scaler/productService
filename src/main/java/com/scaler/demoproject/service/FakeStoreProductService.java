@@ -89,4 +89,9 @@ public class FakeStoreProductService implements ProductService{
 //        // set all the variables and return p;
         return response.toProduct();
     }
+
+    @Override
+    public Product updateProduct(Product product) throws ProductNotFoundException {
+        return null;
+    }
 }

@@ -30,11 +30,11 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public Product createProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) throws ProductNotFoundException{
        // Whenever someone is doing a post request on /product
        // Plz execute this method
         Product postRequestResponse = productService.createProduct(product);
-        return postRequestResponse;
+        return new ResponseEntity<>(postRequestResponse, HttpStatus.CREATED);
     }
 
     @GetMapping("/products/{id}")
@@ -56,12 +56,25 @@ public class ProductController {
         productService.getAllProducts();
     }
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setMessage(e.getMessage());
 
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+
+//    @ExceptionHandler(ProductNotFoundException.class)
+//    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e) {
+//        ErrorDto errorDto = new ErrorDto();
+//        errorDto.setMessage(e.getMessage());
+//
+//        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+//    }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> checkHealthOfTheService() {
+        return new ResponseEntity<>("Backend application server is running perfectly fine", HttpStatus.OK);
+    }
+
+    @PutMapping("/products/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @RequestBody Product product) throws ProductNotFoundException {
+        Product res = productService.updateProduct(product);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
 }
