@@ -3,6 +3,7 @@ package com.scaler.demoproject.service;
 import com.scaler.demoproject.dto.FakeStoreProductDto;
 import com.scaler.demoproject.exceptions.ProductNotFoundException;
 import com.scaler.demoproject.model.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -55,17 +56,18 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        List<Product> products = new ArrayList<>();
-        FakeStoreProductDto[] res = restTemplate.getForObject(
-                "url",
-                FakeStoreProductDto[].class
-        );
-
-        for(FakeStoreProductDto fs: res) {
-            products.add(fs.toProduct());
-        }
-        return products;
+    public Page<Product> getAllProducts(int pageSize, int pageNumber, String fieldName) {
+//        List<Product> products = new ArrayList<>();
+//        FakeStoreProductDto[] res = restTemplate.getForObject(
+//                "url",
+//                FakeStoreProductDto[].class
+//        );
+//
+//        for(FakeStoreProductDto fs: res) {
+//            products.add(fs.toProduct());
+//        }
+//        return products;
+        return null;
     }
 
     @Override

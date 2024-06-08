@@ -2,6 +2,8 @@ package com.scaler.demoproject.repositories;
 
 import com.scaler.demoproject.model.Product;
 import com.scaler.demoproject.repositories.projections.ProductProjection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +16,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Product findByTitle(String title);
     // select * from product where title = {};
     Product findByDescription(String description);
+
+    Page<Product> findAll(Pageable pageable);
+//    List<Product> findAll();
+    // List of products as well as other information related to pagination
+    // that we will pass
 
 
     // How to implement HQL
@@ -31,6 +38,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // How to implement HQL
     @Query("select p.title as title, p.id as id from Product p where p.category.id = :categoryId" )
     List<ProductProjection> getProductsByCategoryIdProjection(@Param("categoryId") Long categoryId);
+
 }
 
 // the attributes that are created by database, you will get it as part
