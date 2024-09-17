@@ -54,9 +54,17 @@ public class ProductController {
         //return currentProduct;
     }
 
+
     @GetMapping("/products")
-    public Page<Product> getAllProducts(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber, @RequestParam("sortBy") String fieldName) {
-        return productService.getAllProducts(pageSize, pageNumber, fieldName);
+    public List<Product> getAllProducts(@RequestParam("pageSize") int pageSize, @RequestParam("pageNumber") int pageNumber, @RequestParam("sortBy") String fieldName) {
+        List<Product> res =  productService.getAllProducts(pageSize, pageNumber, fieldName);
+
+
+        for(Product p : res) {
+            p.setTitle("Hello " + p.getTitle());
+        }
+
+        return res;
     }
 
 

@@ -66,18 +66,17 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public Page<Product> getAllProducts(int pageSize, int pageNumber, String fieldName) {
-//        List<Product> products = new ArrayList<>();
-//        FakeStoreProductDto[] res = restTemplate.getForObject(
-//                "url",
-//                FakeStoreProductDto[].class
-//        );
-//
-//        for(FakeStoreProductDto fs: res) {
-//            products.add(fs.toProduct());
-//        }
-//        return products;
-        return null;
+    public List<Product> getAllProducts(int pageSize, int pageNumber, String fieldName) {
+        List<Product> products = new ArrayList<>();
+        FakeStoreProductDto[] res = restTemplate.getForObject(
+                "https://fakestoreapi.com/products/",
+                FakeStoreProductDto[].class
+        );
+
+        for (FakeStoreProductDto fs : res) {
+            products.add(fs.toProduct());
+        }
+        return products;
     }
 
     @Override

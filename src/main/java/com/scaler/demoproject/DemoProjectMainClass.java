@@ -12,16 +12,16 @@ public class DemoProjectMainClass {
 //        Product p = new Product();
 //        p.setTitle("xyz");
 //
-//        SpringApplication.run(DemoProjectMainClass.class, args);
+        SpringApplication.run(DemoProjectMainClass.class, args);
 
-        Student s1 = new Student();
-        s1.name = "Jayaaditya";
-        s1.age = 25;
-
-        Student s2 = new Student();
-        s2.name = "Kishore";
-        s2.age = 24;
-        System.out.println("Done with blueprints");
+//        Student s1 = new Student();
+//        s1.name = "Jayaaditya";
+//        s1.age = 25;
+//
+//        Student s2 = new Student();
+//        s2.name = "Kishore";
+//        s2.age = 24;
+//        System.out.println("Done with blueprints");
     }
 
 }
