@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productservice
+  labels:
+    app: productservice
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: productservice
+  template:
+    metadata:
+      name: productservice
+      labels:
+        app: productservice
+    spec:
+      containers:
+        - name: productservice
+          image: dheerajscaler/productservice:v2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+      
